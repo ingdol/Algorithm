@@ -1,8 +1,12 @@
 function solution(n) {
-    var answer = 0;
-    let res = n.toString(2)
-    let cnt = 0
-    console.log(res)
+    let cnt = n.toString(2).split('1').length - 1
+    let subN = Number(n)
+    let subCnt = 0
     
-    return cnt;
+    while (subCnt !== cnt) {
+        subN += 1
+        subCnt = subN.toString(2).split('1').length - 1
+    }
+    
+    return subN;
 }
