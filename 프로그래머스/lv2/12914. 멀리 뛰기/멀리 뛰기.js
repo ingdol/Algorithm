@@ -1,13 +1,16 @@
-function solution (n) {
-  return fibonacci(n);
-}
-
-const fibonacci = (n) => {
-  const dp = new Array(n+1).fill(0);
-  dp[0] = 1; dp[1] = 1;
-  
-  for(let i = 2; i <= n; i++)
-    dp[i] = (dp[i-1] + dp[i-2]) % 1234567;
-  
-  return dp[n];
+function solution(n) {
+    let answer = 1;
+    let arr = new Array(n).fill(1);
+    console.log(arr)
+    for(let i = 0; i < n; i++) {
+        let z = i
+        for(let j = 1 + z; j < n; j++) {
+            arr[z] -= 1
+            arr[j] += 1
+            if(arr[j] === 3) return answer % 1234567
+            answer += 1
+            z += 1
+        }
+    }
+    return answer % 1234567;
 }
