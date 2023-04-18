@@ -3,8 +3,8 @@ function solution(arr) {
     if (arr.length === 1) {
         return [-1]
     } else {
-        let n = arr.sort((a, b) => b - a).pop()
-        answer = answer.filter((e) => e !== n)
-        return answer
+        console.log(Math.max(...arr))
+        arr.splice(arr.indexOf(Math.min(...arr)), 1)
+        return arr
     }
 }
