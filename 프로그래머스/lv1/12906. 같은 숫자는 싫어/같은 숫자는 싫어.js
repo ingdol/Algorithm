@@ -1,13 +1,9 @@
 function solution(arr)
 {
-    let answer = [];
-    
-    let i = 0;
-    while (i < arr.length) {
-        if(arr[i] !== arr[i+1]) {
-            answer.push(arr[i])
-        }
-        i++
+    let res = [arr[0]];
+    for(let i = 1; i < arr.length; i++) {
+        res[res.length - 1] !== arr[i] && res.push(arr[i])
     }
-    return answer;
+    
+    return res;
 }
