@@ -1,8 +1,8 @@
 function solution(d, budget) {
-    let sum = 0, cnt = 0
+    let cnt = 0
     d.sort((a, b) => a - b)
-    while(budget >= sum) {
-        sum += d[cnt]
+    while(budget >= 0) {
+        budget -= d[cnt]
         cnt++
     }
     return cnt - 1
