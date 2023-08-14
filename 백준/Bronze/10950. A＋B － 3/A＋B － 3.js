@@ -1,0 +1,5 @@
+let input = require('fs').readFileSync('/dev/stdin').toString().split('\n');
+for (let i = 1; i <= input[0]; i++) {
+  let arr = input[i].split(' ');
+  console.log(Number(arr[0]) + Number(arr[1]));
+}
