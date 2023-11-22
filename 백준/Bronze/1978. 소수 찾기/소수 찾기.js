@@ -1,14 +1,15 @@
-const input = require("fs").readFileSync("/dev/stdin").toString().trim().split("\n")[1].split(" ");
+let input = require("fs").readFileSync("/dev/stdin").toString().trim().split("\n").map(n => n.split(" ").map(Number));
 
 let answer = 0;
-for (let i = 0; i < input.length; i++) {
-  let num = Number(input[i]);
-  let n = 2;
-  let cnt = 0;
-  while (n <= num) {
-    if (num % n === 0) cnt++;
-    n++;
+function isPrime(n) {
+  if (n === 1) return;
+  for (let i = 2; Math.sqrt(n) >= i; i++) {
+    if (n % i === 0) return;
   }
-  cnt === 1 && answer++;
+  return n;
 }
+
+input[1].forEach(n => isPrime(n) && answer++);
 console.log(answer);
+
+
