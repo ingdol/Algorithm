@@ -1,13 +1,15 @@
-let input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
+let input = require("fs").readFileSync("/dev/stdin").toString().trim().split(/\n/); 
 
-let arr = input[1].split(' ');
-let arr2 = input[3].split(' ');
-let dic = {};
-arr.map((n) => {
-  if (dic[Number(n)] > 0) {
-    ++dic[Number(n)];
-  } else dic[Number(n)] = 1;
+const haveCard = input[1].split(" ").map(Number);
+
+let cardDic = new Map();
+haveCard.forEach(n => {
+  if (cardDic.has(n)) {
+    cardDic.set(n, cardDic.get(n) + 1);
+  } else cardDic.set(n, 1);
 });
-let answer = [];
-arr2.map((n) => answer.push(dic[Number(n)] || 0));
-console.log(answer.join(' '));
+
+const checkCard = input[3].split(" ").map(Number);
+let resultArr = checkCard.map(m => (cardDic.has(m) ? cardDic.get(m) : 0));
+
+console.log(resultArr.join(" "));
