@@ -1,26 +1,24 @@
 let input = require("fs").readFileSync("/dev/stdin").toString().trim().split(/\n/);
 
-let N = Number(input[0]);
-let arr = input.slice(1).map(n => n.trim().split("").map(Number));
-let res = [];
+const N = Number(input[0]);
+const arr = input.slice(1).map(str => str.trim().split("").map(Number));
+
 function recursion(n, x, y) {
-  let total = 0;
+  let sum = 0;
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
-      total += arr[i + x][j + y];
+      sum += arr[i + x][j + y];
     }
   }
-  if (total === 0) res.push(0);
-  else if (n * n === total) res.push(1);
+  if (sum === 0) return "0";
+  else if (n * n === sum) return "1";
   else {
     n /= 2;
-    res.push("(");
-    recursion(n, x, y);
-    recursion(n, x, y + n);
-    recursion(n, x + n, y);
-    recursion(n, x + n, y + n);
-    res.push(")");
+    let topLeft = recursion(n, x, y);
+    let topRight = recursion(n, x, y + n);
+    let bottomLeft = recursion(n, x + n, y);
+    let bottomRight = recursion(n, x + n, y + n);
+    return `(${topLeft}${topRight}${bottomLeft}${bottomRight})`;
   }
 }
-recursion(N, 0, 0);
-console.log(res.join(""));
+console.log(recursion(N, 0, 0));
