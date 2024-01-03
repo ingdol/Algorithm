@@ -1,12 +1,10 @@
-let N = require("fs").readFileSync("/dev/stdin").toString().trim().split(/\n/).map(Number);
+let input = require("fs").readFileSync("/dev/stdin").toString().trim().split(/\n/).map(Number);
 
-function checkTriangle(n) {
-  let sum = n.reduce((a, b) => a + b);
-  if (sum === 180) {
-    if (n[0] === n[1] && n[1] === n[2]) return "Equilateral";
-    else if (n[0] === n[1] || n[1] === n[2] || n[0] === n[2])
-      return "Isosceles";
-    else return "Scalene";
-  } else return "Error";
+function check(arr) {
+  if (arr.reduce((a, b) => a + b) !== 180) return "Error";
+  if (arr.every(n => n === 60)) return "Equilateral";
+  if (arr[0] === arr[1] || arr[1] === arr[2] || arr[0] === arr[2])
+    return "Isosceles";
+  return "Scalene";
 }
-console.log(checkTriangle(N));
+console.log(check(input));
