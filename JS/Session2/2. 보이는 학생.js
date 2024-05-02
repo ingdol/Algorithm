@@ -13,9 +13,13 @@
 // 5
 
 function solution(arr) {
-  let cnt = 0;
-  for (let i = 0; i < arr.length; i++) {
-    arr[i] < arr[i + 1] && cnt++;
+  let cnt = 1,
+    max = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    if (max < arr[i]) {
+      cnt++;
+      max = arr[i];
+    }
   }
   return cnt;
 }
