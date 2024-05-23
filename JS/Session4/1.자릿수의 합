@@ -13,21 +13,19 @@
 // ▣ 출력예제 1
 // 137
 
-
-function solution(n, arr){
-  let answer, max=Number.MIN_SAFE_INTEGER;
-  for(let x of arr){
-      let sum=x.toString().split('').reduce((a, b)=>a+Number(b), 0);
-      if(sum>max){
-          max=sum;
-          answer=x;
-      }
-      else if(sum===max){
-          if(x>answer) answer=x;
-      }
+function solution(n, arr) {
+  let answer,
+    max = Number.MIN_SAFE_INTEGER;
+  for (let i = 0; i < n; i++) {
+    let sum = 0;
+    for (let n of String(arr[i])) sum += Number(n);
+    if (sum > max) {
+      answer = arr[i];
+      max = sum;
+    } else if (sum === max && answer < arr[i]) answer = arr[i];
   }
   return answer;
 }
 
-let arr=[128, 460, 603, 40, 521, 137, 123];
+let arr = [128, 460, 603, 40, 521, 137, 123];
 console.log(solution(7, arr));
