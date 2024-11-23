@@ -2,13 +2,12 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
-set_list = set()
+max_height = 0
 graph = []
 for _ in range(N):
     num_list = list(map(int, input().split()))
     graph.append(num_list)
-    for num in num_list:
-        set_list.add(num)
+    max_height = max(max_height, max(num_list))
 
 directions = [[1, 0], [0, 1], [-1, 0], [0, -1]]
 
@@ -26,8 +25,8 @@ def bfs(inputY, inputX, h, visited):
                 visited[now_y][now_x] = True
     return True
 
-result = set()
-for h in range(max(list(set_list)) + 1):
+result = 0
+for h in range(max_height):
     cnt = 0
     visited = [[False for _ in range(N)] for _ in range(N)]
     for i in range(N):
@@ -35,5 +34,5 @@ for h in range(max(list(set_list)) + 1):
             if graph[i][j] > h and not visited[i][j]:
                 if bfs(i, j, h, visited):
                     cnt += 1
-    result.add(cnt)
-print(max(list(result)))
+    result = max(result, cnt)
+print(result)
