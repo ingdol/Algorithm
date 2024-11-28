@@ -2,18 +2,19 @@ import sys
 input = sys.stdin.readline
 
 price = int(input())
-coin = [5, 2]
-i = 0
+coins = [5, 2]
 cnt = 0
-none_price = [1, 3]
-if price in none_price : cnt = -1
-else:
-    while price > 0:
-        cnt += price // coin[i]
-        price %= coin[i]
-        if price % 2 != 0:
-            cnt -= 1
-            price += coin[i]
-        i += 1
+rest = price % 5
 
-print(cnt)
+for coin in coins:
+    if price >= coin:
+        if coin == 5 and rest % 2 != 0:
+            cnt = price // coin - 1
+            price -= cnt * coin
+        else:
+            cnt += price // coin
+            price %= coin
+
+if price == 0:
+    print(cnt)
+else: print(-1)
