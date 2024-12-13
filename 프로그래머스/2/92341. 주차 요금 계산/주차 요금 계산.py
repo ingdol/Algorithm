@@ -31,9 +31,7 @@ def solution(fees, records):
         if time <= fee_default_time:
             fin_time_car[fin_car] = fee_default_cost
         else:
-            ceil_cost = math.ceil(time - fee_default_time)
-            ceil_cost2 = math.ceil(ceil_cost / fee_min_time)
-            fin_time_car[fin_car] = fee_default_cost + ceil_cost2 * fee_min_const
+            fin_time_car[fin_car] = fee_default_cost + math.ceil((time - fee_default_time) / fee_min_time) * fee_min_const
     sort_car_list = sorted(fin_time_car.keys())
     for car in sorted(fin_time_car.keys()):
         answer.append(fin_time_car[car])
