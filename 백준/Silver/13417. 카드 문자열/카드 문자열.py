@@ -9,7 +9,7 @@ for _ in range(N):
     card_sort = deque()
     card_sort.append(str_list[0])
     for i in range(1, n):
-        if ord(str_list[i]) <= ord(card_sort[0]):
+        if str_list[i] <= card_sort[0]:
             card_sort.appendleft(str_list[i])
         else: card_sort.append(str_list[i])
     print(''.join(card_sort))
