@@ -17,7 +17,6 @@ function solution(dirs) {
         }
     }
     const answer = Array.from(new Set(visited.map(a => JSON.stringify(a))), json => JSON.parse(json))
-    console.log(answer)
     return answer.length / 2
     
 }
