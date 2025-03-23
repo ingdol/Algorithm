@@ -1,29 +1,27 @@
 function solution(s) {
     let answer = 0;
     let arr = [...s]
-    let save = []
-    let cnt = s.length
-    while (cnt > 0) {
-        let popStr = arr.shift()
-        arr.push(popStr)
-        let flag = 0
-        for (let str of arr) {
-            if (str === '[' || str === '(' || str === '{') {
-                save.push(str)
-            } else {
-                let strPop = save.pop()
-                if ((str === ']' && strPop === '[') || (str === ')' && strPop === '(') || (str === '}' && strPop === '{')) {
-                } else {
-                    flag = 1
-                }
-            }
-        }
-        if (save.length === 0 && flag === 0) {
+    for (let i = 0; i < s.length; i++) {
+        if (isChecked(arr)) {
             answer += 1
         }
-        save = []
-        cnt -= 1
-        flag = 0
+        arr.push(arr.shift())
     }
     return answer;
+}
+
+function isChecked(arr) {
+    let pair = {'}':'{', ']':'[', ')':'('}
+    let saveArr = []
+    let flag = true
+    for (let str of arr) {
+        if (str === '[' || str === '(' || str === '{') {
+            saveArr.push(str)
+        } else {
+            if (saveArr.pop() !== pair[str]) {
+                flag = false
+            }
+        }
+    }
+    return saveArr.length === 0 && flag === true
 }
