@@ -1,22 +1,18 @@
 function solution(dirs) {
-    const dirs_dic = {
-        'U': [0, 1],
-        'D': [0, -1],
-        'R': [1, 0],
-        'L': [-1, 0]
-    }
-    let visited = []
-    let start_dir = [0, 0]
-    for (let dir of dirs) {
-        const [x, y] = dirs_dic[dir] 
-        const [cur_x, cur_y] = [start_dir[0] + x, start_dir[1] + y]
-        if ((cur_x >= -5 && cur_x <= 5) && (cur_y >= -5 && cur_y <= 5)) {
-            visited.push([start_dir[0], start_dir[1], cur_x, cur_y])
-            visited.push([cur_x, cur_y, start_dir[0], start_dir[1]])
-            start_dir = [cur_x, cur_y]
+    const dic = {U: [0, 1], L: [-1, 0], R: [1, 0], D: [0, -1]}
+    let start = [0, 0]
+    let result = new Set()
+    for (const dir of dirs) {
+        const x = dic[dir][0]
+        const y = dic[dir][1]
+        let moveX = start[0] + x
+        let moveY = start[1] + y
+        if(moveX >= -5 && moveX <= 5 && moveY >= -5 && moveY <= 5) {
+        result.add(`${start[0]}${start[1]}${moveX}${moveY}`)
+        result.add(`${moveX}${moveY}${start[0]}${start[1]}`)
+            
+        start = [moveX, moveY]
         }
     }
-    const answer = Array.from(new Set(visited.map(a => JSON.stringify(a))), json => JSON.parse(json))
-    return answer.length / 2
-    
+    return result.size / 2
 }
